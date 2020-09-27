@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/09/27 03:36:19 by lucimart         ###   ########.fr        #
+#    Updated: 2020/09/27 13:21:58 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@
 # while $< will only get the first one.
 
 NAME =			cub3D
-MLX_LINUX =		-Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Imlx_inux
-MLX_LINUX_OBJ =	-I/usr/include -Imlx_linux -O3
+MLX_LINUX =		-Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Iminilibx-linux
+MLX_LINUX_OBJ =	-I/usr/include -Iminilibx-linux -O3
 CC =			gcc
 #CFLAGS =		-g -Wall -Werror -Wextra
 CFLAGS =		-g
@@ -30,7 +30,7 @@ BONUS_SRCS =
 # ifdef does not expand variable references; it just sees if something is defined at all
 # You can text replace at the end of each space seperated word using $(var:a=b)
 ifdef WITH_BONUS
-OBJS = $(REG_SRCS:.c=.o)  -$(BONUS_SRCS:.c=.o) 
+OBJS = $(REG_SRCS:.c=.o) $(BONUS_SRCS:.c=.o) 
 else
 OBJS = $(REG_SRCS:.c=.o) 
 endif
@@ -40,10 +40,11 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
+	$(MAKE) -s -C ./minilibx-linux
 	@$(CC) $(MLX_LINUX) -o $@ $^
 
 $(LIBFT):
-	$(MAKE) -s bonus -C $(LIBFT_DIR)
+	@$(MAKE) -s bonus -C $(LIBFT_DIR)
 # If the object file doesn’t exist or if the source file is newer
 # than the object file, the contents of the rule will be executed.
 %.o: %.c
@@ -53,6 +54,7 @@ $(LIBFT):
 # - in front of the command makes sure that make ignores a non-zero return code
 clean:
 	$(MAKE) -s clean -C $(LIBFT_DIR)
+	$(MAKE) -s clean -C ./minilibx-linux
 	@rm -f $(OBJS)
 
 fclean: clean
