@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/09/27 01:06:08 by lucimart         ###   ########.fr        #
+#    Updated: 2020/09/27 03:36:19 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,14 @@
 # while $< will only get the first one.
 
 NAME =			cub3D
-MLX_LINUX =		-Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_LINUX =		-Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Imlx_inux
 MLX_LINUX_OBJ =	-I/usr/include -Imlx_linux -O3
 CC =			gcc
-CFLAGS =		-g -Wall -Werror -Wextra
+#CFLAGS =		-g -Wall -Werror -Wextra
+CFLAGS =		-g
 LIBFT_DIR =		./libft/
 LIBFT =			$(LIBFT_DIR)libft.a
-HEADERS_DIR = 	-I ./includes
+HEADERS_DIR = 	-Iinclude
 REG_SRCS =		ft_cub3d.c
 BONUS_SRCS =
 
@@ -39,14 +40,14 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(MLX) -o $@ $^
+	@$(CC) $(MLX_LINUX) -o $@ $^
 
 $(LIBFT):
 	$(MAKE) -s bonus -C $(LIBFT_DIR)
 # If the object file doesn’t exist or if the source file is newer
 # than the object file, the contents of the rule will be executed.
 %.o: %.c
-	@$(CC) -c $(CFLAGS) $(HEADERS_DIR) $(MLX_LINUX_OBJ) -o $@ $<
+	$(CC) -c $(CFLAGS) $(HEADERS_DIR) $(MLX_LINUX_OBJ) -o $@ $<
 
 # @ makes it silent.
 # - in front of the command makes sure that make ignores a non-zero return code
