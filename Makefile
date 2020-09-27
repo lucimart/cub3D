@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/09/27 13:21:58 by lucimart         ###   ########.fr        #
+#    Updated: 2020/09/27 17:40:55 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@
 # while $< will only get the first one.
 
 NAME =			cub3D
-MLX_LINUX =		-Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Iminilibx-linux
-MLX_LINUX_OBJ =	-I/usr/include -Iminilibx-linux -O3
+MLX_FLAGS =		-lmlx -lXext -lX11 -lm -lz
 CC =			gcc
 #CFLAGS =		-g -Wall -Werror -Wextra
 CFLAGS =		-g
@@ -40,15 +39,14 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(MAKE) -s -C ./minilibx-linux
-	@$(CC) $(MLX_LINUX) -o $@ $^
+	@$(CC) -o $@ $^ $(MLX_FLAGS)
 
 $(LIBFT):
 	@$(MAKE) -s bonus -C $(LIBFT_DIR)
 # If the object file doesn’t exist or if the source file is newer
 # than the object file, the contents of the rule will be executed.
 %.o: %.c
-	$(CC) -c $(CFLAGS) $(HEADERS_DIR) $(MLX_LINUX_OBJ) -o $@ $<
+	$(CC) -c $(CFLAGS) $(HEADERS_DIR) -O3 -o $@ $<
 
 # @ makes it silent.
 # - in front of the command makes sure that make ignores a non-zero return code
