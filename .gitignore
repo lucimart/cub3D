@@ -1,5 +1,8 @@
 cub3D
-
+cub3d_destroyer/
+wolftex/
+*.cub
+.vscode
 # Prerequisites
 *.d
 

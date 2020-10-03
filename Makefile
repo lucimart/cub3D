@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/09/27 18:19:40 by lucimart         ###   ########.fr        #
+#    Updated: 2020/10/03 23:26:20 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,19 @@ NAME =			cub3D
 
 CC =			gcc
 CFLAGS =		-g
+#CFLAGS =		-g -Wall -Werror -Wextra
 LIBFT_DIR =		./libft/
 LIBFT =			$(LIBFT_DIR)libft.a
 HEADERS_DIR = 	-Iinclude
-REG_SRCS =		ft_cub3d.c
+REG_SRCS =		ft_cub3d.c \
+				src/rgb.c \
+				src/colors_aux.c \
+				src/img.c \
+				src/events.c \
+				src/errors.c \
+				src/config/map.c \
+				src/config/params.c \
+				src/utils/utils.c
 BONUS_SRCS =
 
 # Checks OS to see which LDFLAGS should use to include MiniLibX
@@ -47,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "\033[33m[Compiling Cub3D...]"
-	@$(CC) -o $@ $^ $(LDFLAGS)
+	@$(CC) -g -o $@ $^ $(HEADERS_DIR) $(LDFLAGS)
 
 $(LIBFT):
 	@echo "\033[33m[Compiling Libft...]"
@@ -55,7 +64,7 @@ $(LIBFT):
 # If the object file doesn’t exist or if the source file is newer
 # than the object file, the contents of the rule will be executed.
 %.o: %.c
-	@$(CC) -c $(CFLAGS) $(HEADERS_DIR) -O3 -o $@ $<
+	@$(CC) -c $(CFLAGS) $(HEADERS_DIR) -O0 -o $@ $<
 
 # @ makes it silent.
 # - in front of the command makes sure that make ignores a non-zero return code
