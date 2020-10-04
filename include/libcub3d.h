@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 18:55:31 by lucimart          #+#    #+#             */
-/*   Updated: 2020/10/03 23:57:24 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:05:20 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int				get_b(int trgb);
 int				get_opposite(int trgb);
 int				add_shade(double distance, int trgb);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int trgb);
-int             close_win(int keycode, t_conf *conf);
+void            close_win(int keycode, t_conf *conf);
 int	            is_ext(const char *filename, const char *ext);
 int		        is_save_flag(const char *str);
 int				amount_of(char **arr, char c);

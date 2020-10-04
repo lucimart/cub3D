@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/10/03 23:26:20 by lucimart         ###   ########.fr        #
+#    Updated: 2020/10/04 18:02:20 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME =			cub3D
 
 CC =			gcc
 CFLAGS =		-g
-#CFLAGS =		-g -Wall -Werror -Wextra
+CFLAGS =		-g -Wall -Werror -Wextra
 LIBFT_DIR =		./libft/
 LIBFT =			$(LIBFT_DIR)libft.a
 HEADERS_DIR = 	-Iinclude

@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 23:22:56 by lucimart          #+#    #+#             */
-/*   Updated: 2020/10/03 23:27:54 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/10/04 19:45:51 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,16 @@ static int	is_part_sorrounded(char **map, int x, int y, char *set)
 {
     int check_x;
     int check_y;
-    int i;
     int counter;
 
     counter = 0;
-    i = -1;
     check_x = x - 1;
     check_y = y - 1 - 1;
     while (check_x <= x + 1)
     {
         while (++check_y <= y + 1)
             if (check_x < 0 || check_y < 0 ||
-                ft_strlen(map[check_x]) - 1 < check_y ||
+                check_y > (int)ft_strlen(map[check_x]) - 1 ||
                 in_set(map[check_x][check_y], set))
                 return (1);
         check_y = y - 1 - 1;
@@ -72,20 +70,27 @@ static void	check_map(t_conf *conf)
 
 void    	parse_map(int fd, char *line, t_conf *conf)
 {
-    char *tmp;
-
-    if ((get_next_line(fd, &line) <= 0 || (!(*ft_split(line, ' ') == "") &&
+    char    *tmp;
+    char    **arr;
+    
+    if ((get_next_line(fd, &line) <= 0 || ((arr = ft_split(line, ' ')) &&
+        !ft_strequ(*arr, "") &&
         !in_set(*line, " \t1") && !ft_strequ(line, ""))) && (conf->err = 1))
         return ;
-    while ((*ft_split(line, ' ') == "") || ft_strchr(line, ' ') ||
+    free(arr);
+    while (((arr = ft_split(line, ' ')) && ft_strequ(*arr, "")) || ft_strchr(line, ' ') ||
         ft_strchr(line, '\t'))
         if ((get_next_line(fd, &line) <= 0) && (conf->err = 1))
             return ;
-    tmp = ft_strdup(line);
-    while (check_line(line, conf) && (get_next_line(fd, &line) > 0))
-        tmp = ft_strjoin((ft_strjoin(tmp, ".")), line);
-    if (check_line(line, conf))
-        tmp = ft_strjoin((ft_strjoin(tmp, ".")), line);
+    tmp = ft_strdup("");
+    while (check_line(line, conf) && ft_strlcat(tmp, ".", ft_strlen(tmp) + 2) &&
+        ft_strlcat(tmp, line, ft_strlen(line) + ft_strlen(tmp) + 1))
+        if (!(get_next_line(fd, &line) > 0))
+            break;
+    if (check_line(line, conf) && ft_strlcat(tmp, ".", ft_strlen(tmp) + 2))
+        ft_strlcat(tmp, line, ft_strlen(line) + ft_strlen(tmp) + 1);
     conf->map = ft_split(tmp, '.');
+    free(arr);
+    free(tmp);
     check_map(conf);
 }

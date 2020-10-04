@@ -1,0 +1,2892 @@
+==61643== Memcheck, a memory error detector
+==61643== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==61643== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==61643== Command: ./cub3D test.cub
+==61643== Parent PID: 8914
+==61643== 
+--61643-- 
+--61643-- Valgrind options:
+--61643--    --leak-check=full
+--61643--    --show-leak-kinds=all
+--61643--    --track-origins=yes
+--61643--    --verbose
+--61643--    --log-file=valgrind-out2.txt
+--61643-- Contents of /proc/version:
+--61643--   Linux version 5.4.0-48-generic (buildd@lcy01-amd64-010) (gcc version 9.3.0 (Ubuntu 9.3.0-10ubuntu2)) #52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020
+--61643-- 
+--61643-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--61643-- Page sizes: currently 4096, max supported 4096
+--61643-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--61643-- Reading syms from /home/lucimart/Documents/repos/cub3D/cub3D
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--61643--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--61643--   .. CRC mismatch (computed 6cded93a wanted 1af57820)
+--61643--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--61643--   .. CRC mismatch (computed 6cded93a wanted 1af57820)
+--61643--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--61643--   .. CRC is valid
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--61643--    object doesn't have a symbol table
+--61643--    object doesn't have a dynamic symbol table
+--61643-- Scheduler: using generic scheduler lock implementation.
+--61643-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==61643== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-61643-by-lucimart-on-???
+==61643== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-61643-by-lucimart-on-???
+==61643== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-61643-by-lucimart-on-???
+==61643== 
+==61643== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==61643== don't want to do, unless you know exactly what you're doing,
+==61643== or are doing some strange experiment):
+==61643==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=61643 ...command...
+==61643== 
+==61643== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==61643==   /path/to/gdb ./cub3D
+==61643== and then give GDB the following command
+==61643==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=61643
+==61643== --pid is optional if only one valgrind process is running
+==61643== 
+--61643-- REDIR: 0x4022d80 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--61643-- REDIR: 0x4022b50 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--61643--    object doesn't have a symbol table
+==61643== WARNING: new redirection conflicts with existing -- ignoring it
+--61643--     old: 0x04022d80 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--61643--     new: 0x04022d80 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--61643-- REDIR: 0x401f560 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--61643-- REDIR: 0x40232e0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libm-2.31.so
+--61643--   Considering /usr/lib/x86_64-linux-gnu/libm-2.31.so ..
+--61643--   .. CRC mismatch (computed b88da5c9 wanted 1658d783)
+--61643--   Considering /lib/x86_64-linux-gnu/libm-2.31.so ..
+--61643--   .. CRC mismatch (computed b88da5c9 wanted 1658d783)
+--61643--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.31.so ..
+--61643--   .. CRC is valid
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--61643--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--61643--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--61643--   Considering /lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--61643--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--61643--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--61643--   .. CRC mismatch (computed cd1655d1 wanted 09373696)
+--61643--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--61643--   .. CRC mismatch (computed cd1655d1 wanted 09373696)
+--61643--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--61643--   .. CRC is valid
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+--61643--   Considering /usr/lib/x86_64-linux-gnu/libdl-2.31.so ..
+--61643--   .. CRC mismatch (computed a3ca3288 wanted 3cde2f36)
+--61643--   Considering /lib/x86_64-linux-gnu/libdl-2.31.so ..
+--61643--   .. CRC mismatch (computed a3ca3288 wanted 3cde2f36)
+--61643--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.31.so ..
+--61643--   .. CRC is valid
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--61643--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--61643--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--61643--   Considering /lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--61643--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--61643--    object doesn't have a symbol table
+--61643-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+--61643--    object doesn't have a symbol table
+--61643-- REDIR: 0x4ba6600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba7dd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc2e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc29a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba52d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba66c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc2960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba57f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba53b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6ad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc40d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc29e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba59a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba57b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4baed20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba69d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4bc2ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba5c60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba68d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba7e10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4ba6a20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--61643-- REDIR: 0x4c8e490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--61643-- REDIR: 0x4ba0260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--61643-- REDIR: 0x4c8e660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--61643-- REDIR: 0x4c89fa0 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
+--61643-- REDIR: 0x4ba1c90 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--61643-- REDIR: 0x4c91670 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--61643-- REDIR: 0x4ba0850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--61643-- REDIR: 0x4c8e2a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--61643-- REDIR: 0x4c33c90 (libc.so.6:__strcpy_chk) redirected to 0x48435c0 (__strcpy_chk)
+--61643-- REDIR: 0x4ba6120 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--61643-- REDIR: 0x4c8ac50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
+--61643-- REDIR: 0x4c91af0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+--61643-- REDIR: 0x4ba1000 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--61643-- REDIR: 0x4c8ff30 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
+--61643-- REDIR: 0x4c8fba0 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+==61643== Invalid read of size 1
+==61643==    at 0x10B961: ft_gnl_substr (get_next_line_utils.c:49)
+==61643==    by 0x10B538: gnl_aux (get_next_line.c:54)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109620: pre_game (ft_cub3d.c:53)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d617a1 is 0 bytes after a block of size 33 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109620: pre_game (ft_cub3d.c:53)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A539: check_color (params.c:82)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357b is 10 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B7E7: ft_strtrim (ft_strtrim.c:25)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B715: ft_substr (ft_substr.c:23)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B73C: ft_substr (ft_substr.c:26)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A539: check_color (params.c:82)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5b is 10 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E40: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E09: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B961: ft_gnl_substr (get_next_line_utils.c:49)
+==61643==    by 0x10B538: gnl_aux (get_next_line.c:54)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64910 is 0 bytes after a block of size 224 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E89: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442b is 139 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442c is 140 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109EC0: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442c is 140 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443d is 157 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B7E7: ft_strtrim (ft_strtrim.c:25)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443c is 156 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443c is 156 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== Invalid read of size 1
+==61643==    at 0x10B73C: ft_substr (ft_substr.c:26)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== HEAP SUMMARY:
+==61643==     in use at exit: 57,636 bytes in 143 blocks
+==61643==   total heap usage: 250 allocs, 107 frees, 67,953 bytes allocated
+==61643== 
+==61643== Searching for pointers to 143 not-freed blocks
+==61643== Checked 184,528 bytes
+==61643== 
+==61643== 1 bytes in 1 blocks are definitely lost in loss record 1 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B914: ft_gnl_substr (get_next_line_utils.c:43)
+==61643==    by 0x10B4F5: gnl_aux (get_next_line.c:53)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109CA9: parse_map (map.c:76)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 1 bytes in 1 blocks are definitely lost in loss record 2 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109CBE: parse_map (map.c:76)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 1 bytes in 1 blocks are definitely lost in loss record 3 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109D6A: parse_map (map.c:81)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 3 bytes in 1 blocks are still reachable in loss record 4 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4BA550E: strdup (strdup.c:42)
+==61643==    by 0x49F42F5: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 4 bytes in 1 blocks are definitely lost in loss record 5 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AC43: ft_itoa (ft_itoa.c:38)
+==61643==    by 0x10A06D: check_resolution (params.c:35)
+==61643==    by 0x10A89F: parse (params.c:121)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 4 bytes in 1 blocks are definitely lost in loss record 6 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AC43: ft_itoa (ft_itoa.c:38)
+==61643==    by 0x10A098: check_resolution (params.c:36)
+==61643==    by 0x10A89F: parse (params.c:121)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 8 bytes in 1 blocks are still reachable in loss record 7 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4BA550E: strdup (strdup.c:42)
+==61643==    by 0x49EE1FE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49BF3F0: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 8 bytes in 1 blocks are still reachable in loss record 8 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF144: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF1AE: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 10 bytes in 1 blocks are still reachable in loss record 9 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4BA550E: strdup (strdup.c:42)
+==61643==    by 0x49EE1FE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x4A5AA93: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4D89: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 3 blocks are indirectly lost in loss record 10 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10AE80: split_aux (ft_split.c:54)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 3 blocks are indirectly lost in loss record 11 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10AE80: split_aux (ft_split.c:54)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 1 blocks are definitely lost in loss record 12 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 1 blocks are definitely lost in loss record 13 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 3 blocks are definitely lost in loss record 14 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AC43: ft_itoa (ft_itoa.c:38)
+==61643==    by 0x10A596: check_color (params.c:88)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 11 bytes in 3 blocks are definitely lost in loss record 15 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AC43: ft_itoa (ft_itoa.c:38)
+==61643==    by 0x10A596: check_color (params.c:88)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 16 bytes in 1 blocks are still reachable in loss record 16 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4D03F81: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D023FB: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D008F5: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D04B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4A03B79: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 18 bytes in 1 blocks are definitely lost in loss record 17 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B914: ft_gnl_substr (get_next_line_utils.c:43)
+==61643==    by 0x10B4A0: gnl_aux (get_next_line.c:46)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 19 bytes in 1 blocks are definitely lost in loss record 18 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A377: check_sprite (params.c:60)
+==61643==    by 0x10A939: parse (params.c:125)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 19 bytes in 1 blocks are definitely lost in loss record 19 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A2ED: check_sprite (params.c:56)
+==61643==    by 0x10A939: parse (params.c:125)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 21 bytes in 1 blocks are still reachable in loss record 20 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F47AC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 21 bytes in 1 blocks are definitely lost in loss record 21 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A3FE: check_sprite (params.c:64)
+==61643==    by 0x10A939: parse (params.c:125)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 23 bytes in 1 blocks are definitely lost in loss record 22 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A332: check_sprite (params.c:58)
+==61643==    by 0x10A939: parse (params.c:125)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 24 bytes in 1 blocks are still reachable in loss record 23 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF351: XextCreateExtension (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BEE1C: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF19B: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 24 bytes in 1 blocks are still reachable in loss record 24 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4BA550E: strdup (strdup.c:42)
+==61643==    by 0x49EE1FE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49BF3F0: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BEE5A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF19B: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643== 
+==61643== 24 bytes in 1 blocks are still reachable in loss record 25 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF1CD: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 24 bytes in 1 blocks are still reachable in loss record 26 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A04105: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x4A0468E: _XSend (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x4A04CB3: _XReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49EB18A: _XGetWindowAttributes (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49EB2FD: XGetWindowAttributes (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10C0C4: mlx_get_screen_size (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10A0DB: check_resolution (params.c:38)
+==61643==    by 0x10A89F: parse (params.c:121)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 24 bytes in 1 blocks are definitely lost in loss record 27 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A3BC: check_sprite (params.c:62)
+==61643==    by 0x10A939: parse (params.c:125)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 32 bytes in 1 blocks are still reachable in loss record 28 of 65
+==61643==    at 0x483B723: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x483E017: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4D03B9E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D03C2B: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D0113E: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D011B4: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x49F4C48: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 32 bytes in 1 blocks are still reachable in loss record 29 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4D030C5: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D00E9E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D0261E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D02734: xcb_wait_for_reply (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D03C82: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D0113E: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D011B4: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x49F4C48: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643== 
+==61643== 32 bytes in 1 blocks are still reachable in loss record 30 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF3CF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 32 bytes in 1 blocks are still reachable in loss record 31 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF3CF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BEE5A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF19B: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 33 bytes in 1 blocks are still reachable in loss record 32 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49EF0ED: _XUpdateAtomCache (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49EF4B9: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BD0F: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 40 bytes in 1 blocks are still reachable in loss record 33 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A05C21: _XPollfdCacheInit (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F45DF: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 43 (32 direct, 11 indirect) bytes in 1 blocks are definitely lost in loss record 34 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AE02: split_aux (ft_split.c:47)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 43 (32 direct, 11 indirect) bytes in 1 blocks are definitely lost in loss record 35 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AE02: split_aux (ft_split.c:47)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 48 bytes in 1 blocks are still reachable in loss record 36 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A03B01: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 48 bytes in 1 blocks are still reachable in loss record 37 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A03B17: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 72 bytes in 1 blocks are still reachable in loss record 38 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4691: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 104 bytes in 1 blocks are still reachable in loss record 39 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A03A02: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 112 bytes in 1 blocks are still reachable in loss record 40 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4910: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 120 bytes in 1 blocks are definitely lost in loss record 41 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10BC6F: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 128 bytes in 1 blocks are still reachable in loss record 42 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4840: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 128 bytes in 1 blocks are still reachable in loss record 43 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49EE1EE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x4A5AA93: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4D89: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 128 bytes in 1 blocks are still reachable in loss record 44 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49EE1EE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49BF3F0: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 128 bytes in 1 blocks are still reachable in loss record 45 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49EE1EE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49BF3F0: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BEE5A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF19B: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 150 bytes in 1 blocks are still reachable in loss record 46 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4DF1: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 152 bytes in 1 blocks are still reachable in loss record 47 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4A5AC8E: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4D89: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 158 bytes in 17 blocks are indirectly lost in loss record 48 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10AE80: split_aux (ft_split.c:54)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 158 bytes in 8 blocks are definitely lost in loss record 49 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B914: ft_gnl_substr (get_next_line_utils.c:43)
+==61643==    by 0x10B4F5: gnl_aux (get_next_line.c:53)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109620: pre_game (ft_cub3d.c:53)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 158 bytes in 8 blocks are definitely lost in loss record 50 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A81B: parse (params.c:115)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 158 bytes in 8 blocks are definitely lost in loss record 51 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 160 bytes in 1 blocks are still reachable in loss record 52 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49E284F: XCreateGC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4CB8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 168 bytes in 1 blocks are still reachable in loss record 53 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4BA7: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 208 bytes in 1 blocks are still reachable in loss record 54 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49BF0F9: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF1AE: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BF5A2: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x49BA7B2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==61643==    by 0x10BA93: mlx_int_deal_shm (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x10BD1E: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 218 bytes in 14 blocks are definitely lost in loss record 55 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B914: ft_gnl_substr (get_next_line_utils.c:43)
+==61643==    by 0x10B4F5: gnl_aux (get_next_line.c:53)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 234 bytes in 13 blocks are indirectly lost in loss record 56 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10AE80: split_aux (ft_split.c:54)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 234 bytes in 1 blocks are definitely lost in loss record 57 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B6EF: ft_substr (ft_substr.c:20)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 346 (112 direct, 234 indirect) bytes in 1 blocks are definitely lost in loss record 58 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AE02: split_aux (ft_split.c:47)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 358 (200 direct, 158 indirect) bytes in 8 blocks are definitely lost in loss record 59 of 65
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AE02: split_aux (ft_split.c:47)
+==61643==    by 0x10AF98: ft_split (ft_split.c:83)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 512 bytes in 1 blocks are still reachable in loss record 60 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49EF05A: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49EF3DE: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BD0F: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 3,380 bytes in 1 blocks are still reachable in loss record 61 of 65
+==61643==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4D00A62: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D04B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4A03B79: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 4,688 bytes in 1 blocks are still reachable in loss record 62 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F42E1: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 7,392 bytes in 2 blocks are still reachable in loss record 63 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F4994: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 16,384 bytes in 1 blocks are still reachable in loss record 64 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x49F462F: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 21,168 bytes in 1 blocks are still reachable in loss record 65 of 65
+==61643==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x4D00884: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4D04B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==61643==    by 0x4A03B79: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x49F4318: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==61643==    by 0x10BC87: mlx_init (in /home/lucimart/Documents/repos/cub3D/cub3D)
+==61643==    by 0x1094E1: conf_ini (ft_cub3d.c:33)
+==61643==    by 0x10951E: pre_game (ft_cub3d.c:41)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== LEAK SUMMARY:
+==61643==    definitely lost: 1,601 bytes in 70 blocks
+==61643==    indirectly lost: 414 bytes in 36 blocks
+==61643==      possibly lost: 0 bytes in 0 blocks
+==61643==    still reachable: 55,621 bytes in 37 blocks
+==61643==         suppressed: 0 bytes in 0 blocks
+==61643== 
+==61643== ERROR SUMMARY: 7161 errors from 86 contexts (suppressed: 0 from 0)
+==61643== 
+==61643== 1 errors in context 1 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 2 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 3 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 4 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443c is 156 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 5 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443c is 156 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 6 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 7 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 8 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d658f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 9 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6443d is 157 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 10 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442c is 140 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 11 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442b is 139 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 12 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 13 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 14 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 15 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 16 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c5b is 10 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 17 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 18 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A539: check_color (params.c:82)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 19 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B82D: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 20 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B810: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357a is 9 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 21 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 22 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 23 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6357b is 10 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 24 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1 errors in context 25 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x10A539: check_color (params.c:82)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 26 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 27 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 28 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 29 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 30 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 2 errors in context 31 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d635c1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 4 errors in context 32 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7BC: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 4 errors in context 33 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B7AA: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 34 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 35 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 36 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B840: ft_strtrim (ft_strtrim.c:27)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 37 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B224: ft_strchr (ft_strchr.c:19)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 38 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B219: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 8 errors in context 39 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B20B: ft_strchr (ft_strchr.c:17)
+==61643==    by 0x10B7CF: ft_strtrim (ft_strtrim.c:23)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d618f1 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10AF06: ft_split (ft_split.c:74)
+==61643==    by 0x10A86E: parse (params.c:119)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 10 errors in context 40 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63c51 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A9BF: parse (params.c:129)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 10 errors in context 41 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x10A501: check_color (params.c:83)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 14 errors in context 42 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 15 errors in context 43 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 15 errors in context 44 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B368: ft_strlcat (ft_strlcat.c:30)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 17 errors in context 45 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d6442c is 140 bytes inside a block of size 162 free'd
+==61643==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B3F3: free_and_ret (get_next_line.c:31)
+==61643==    by 0x10B56E: gnl_aux (get_next_line.c:58)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Block was alloc'd at
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 20 errors in context 46 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B73C: ft_substr (ft_substr.c:26)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 22 errors in context 47 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B7E7: ft_strtrim (ft_strtrim.c:25)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 32 errors in context 48 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B961: ft_gnl_substr (get_next_line_utils.c:49)
+==61643==    by 0x10B538: gnl_aux (get_next_line.c:54)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64910 is 0 bytes after a block of size 224 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109DE2: parse_map (map.c:88)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 142 errors in context 49 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B961: ft_gnl_substr (get_next_line_utils.c:49)
+==61643==    by 0x10B538: gnl_aux (get_next_line.c:54)
+==61643==    by 0x10B6AB: get_next_line (get_next_line.c:83)
+==61643==    by 0x109620: pre_game (ft_cub3d.c:53)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d617a1 is 0 bytes after a block of size 33 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B8C0: ft_gnl_strnew (get_next_line_utils.c:32)
+==61643==    by 0x10B9C3: ft_gnl_strjoin (get_next_line_utils.c:61)
+==61643==    by 0x10B5EB: get_next_line (get_next_line.c:75)
+==61643==    by 0x109620: pre_game (ft_cub3d.c:53)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 204 errors in context 50 of 86:
+==61643== Invalid write of size 1
+==61643==    at 0x10B328: ft_strlcat (ft_strlcat.c:29)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 219 errors in context 51 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109EA0: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 219 errors in context 52 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E89: parse_map (map.c:90)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 220 errors in context 53 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109EDA: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 220 errors in context 54 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109EC0: parse_map (map.c:91)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 233 errors in context 55 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10B73C: ft_substr (ft_substr.c:26)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 234 errors in context 56 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B7E7: ft_strtrim (ft_strtrim.c:25)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x109EEB: parse_map (map.c:92)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64354 is 3 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 259 errors in context 57 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B715: ft_substr (ft_substr.c:23)
+==61643==    by 0x10B85D: ft_strtrim (ft_strtrim.c:29)
+==61643==    by 0x10AF38: ft_split (ft_split.c:77)
+==61643==    by 0x10A553: check_color (params.c:84)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d63571 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x10A4B2: check_color (params.c:81)
+==61643==    by 0x10A97A: parse (params.c:127)
+==61643==    by 0x1095F9: pre_game (ft_cub3d.c:54)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1227 errors in context 58 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109E20: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1227 errors in context 59 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E09: parse_map (map.c:86)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1242 errors in context 60 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x10B2CD: ft_strlcat (ft_strlcat.c:21)
+==61643==    by 0x109E5A: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== 
+==61643== 1242 errors in context 61 of 86:
+==61643== Invalid read of size 1
+==61643==    at 0x10AB55: ft_strlen (ft_strlen.c:20)
+==61643==    by 0x109E40: parse_map (map.c:87)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643==  Address 0x4d64351 is 0 bytes after a block of size 1 alloc'd
+==61643==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==61643==    by 0x10B004: ft_memalloc (ft_memalloc.c:19)
+==61643==    by 0x10AFC2: ft_strnew (ft_strnew.c:19)
+==61643==    by 0x10AADA: ft_strdup (ft_strdup.c:20)
+==61643==    by 0x109DCB: parse_map (map.c:85)
+==61643==    by 0x10964F: pre_game (ft_cub3d.c:56)
+==61643==    by 0x1096BE: main (ft_cub3d.c:67)
+==61643== 
+==61643== ERROR SUMMARY: 7161 errors from 86 contexts (suppressed: 0 from 0)

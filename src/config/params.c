@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 23:21:01 by lucimart          #+#    #+#             */
-/*   Updated: 2020/10/03 23:57:58 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:14:13 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	check_resolution(t_conf *conf, char **arr)
         else if (i > 2 && (conf->err = 1))
             break;
     }
-    if (!conf->err && conf->x <= 0 || conf->y <= 0)
+    if (!conf->err && (conf->x <= 0 || conf->y <= 0))
         conf->err = 1;
     if (!conf->err && (!ft_strequ(arr[1], ft_itoa(conf->x)) ||
         !ft_strequ(arr[2], ft_itoa(conf->y))))
@@ -77,16 +77,17 @@ static int	check_color(t_conf *conf, char **arr)
         {
             conf->err = 1;
             return (0);
-        }   
+        }
     str = ft_strdup("");
-    while (arr[++i])
-        str = ft_strjoin(ft_strjoin(str, ","), arr[i]);
+    while (arr[++i] && ft_strlcat(str, ",", 2))
+        ft_strlcat(str, arr[i], ft_strlen(arr[i]) + 1);
     clr = ft_split(str, ',');
+    free(str);
     i = -1;
     while (clr[++i] && ((color = ft_atoi(clr[i])) || 1))
         if (color < 0 || color > 255 || !ft_strequ(ft_itoa(color), clr[i]))
             conf->err = 1;
-    if (conf->err || ((i != 3) && (conf->err = 1)))
+    if  (conf->err || ((i != 3) && (conf->err = 1)))
         return (0);
     return (trgb(0, ft_atoi(clr[0]), ft_atoi(clr[1]), ft_atoi(clr[2])));
 }

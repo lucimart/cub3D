@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 18:59:28 by lucimart          #+#    #+#             */
-/*   Updated: 2020/10/04 01:45:14 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/10/04 19:36:47 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void            pre_game(t_conf *conf, int argc, char **argv)
 {
     int fd;
     char *line;
+
     conf_ini(conf);
     if (argc < 2 || argc > 3)
         ft_putstr("Error\nInvalid amount of arguments.");
@@ -55,7 +56,7 @@ void            pre_game(t_conf *conf, int argc, char **argv)
             parse_map(fd, line, conf);
         if (conf->err)
             ft_putstr("Error\nThere was an error while parsing the file");
-    } 
+    }
     close(fd);
 }
 
