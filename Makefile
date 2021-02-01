@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/10/04 18:02:20 by lucimart         ###   ########.fr        #
+#    Updated: 2021/02/01 20:09:48 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,20 +18,13 @@
 NAME =			cub3D
 
 CC =			gcc
-CFLAGS =		-g
+# CFLAGS =		-g
 CFLAGS =		-g -Wall -Werror -Wextra
 LIBFT_DIR =		./libft/
 LIBFT =			$(LIBFT_DIR)libft.a
 HEADERS_DIR = 	-Iinclude
-REG_SRCS =		ft_cub3d.c \
-				src/rgb.c \
-				src/colors_aux.c \
-				src/img.c \
-				src/events.c \
-				src/errors.c \
-				src/config/map.c \
-				src/config/params.c \
-				src/utils/utils.c
+REG_SRCS =		src/main.c \
+				src/utils.c
 BONUS_SRCS =
 
 # Checks OS to see which LDFLAGS should use to include MiniLibX
