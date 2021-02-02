@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 18:55:31 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/01 19:52:30 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/02 18:21:03 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,9 @@ typedef struct s_data
 typedef struct s_flags
 {
 	int		has_res;
-	int		has_no;
-	int		has_so;
-	int		has_ea;
-	int		has_we;
-	int		has_sprite;
-	int		has_ceil;
-	int		has_floor;
+	int		has_texs;
+	int		has_sky;
+	int		sky_def[2];
 	int		has_map;
 	int		is_map;
 	int		done;
@@ -81,13 +77,8 @@ typedef struct	s_map
 	void	*win;
 	int		res[2];
 	int		max_res[2];
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
-	char	*sprite;
-	char	ceil[3];
-	char	floor[3];
+	char	*texs[5];
+	int		sky[2][3];
 	char	**mt;
 	int		save;
 }				t_map;

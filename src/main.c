@@ -6,20 +6,21 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/02 15:38:21 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/02 20:38:17 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libcub3d.h"
 
-int		check_ext(const char *filename, const char *ext, t_flags *flags) 
+int		check_ext(const char *file, const char *ext, t_flags *flags, int error)
 {
 	const char *dot;
 
-	dot = ft_strrchr(filename, '.');
-	if (!dot || dot == filename || !ft_strequ(dot, ext))
+	dot = ft_strrchr(file, '.');
+	if (!dot || dot == file || !ft_strequ(dot, ext))
 	{
-		err("Invalid file extension (not \'.cub\')", flags);
+		if (error)
+			err("Invalid file extension", flags);
 		return (0);
 	}
 	return (1);
@@ -38,23 +39,20 @@ int		is_save(const char *str, t_flags *flags)
 */
 void	map_ini(t_map *map) {
 	int i;
+	int	j;
 
 	i = -1;
 	map->mlx = mlx_init();
 	map->win = NULL;
 	map->res[0] = 0;
 	map->res[1] = 0;
+	while (++i < 5)
+		map->texs[i] = NULL;
+	i = -1;
 	mlx_get_screen_size(map->mlx, &(map->max_res[0]), &(map->max_res[1]));
-	map->no = 0;
-	map->so = 0;
-	map->ea = 0;
-	map->we = 0;
-	map->sprite = 0;
-	while (++i < 3)
-	{
-		map->ceil[i] = 0;
-		map->floor[i] = 0;
-	}
+	while (++i < 2 && (j = -1))
+		while (++j < 3)
+			map->sky[i][j] = 0;
 	map->mt = NULL;
 }
 
@@ -63,17 +61,17 @@ void	map_ini(t_map *map) {
 */
 void	flags_ini(t_flags *flags)
 {
+	int i;
+
 	flags->has_res = 0;
-	flags->has_no = 0;
-	flags->has_so = 0;
-	flags->has_ea = 0;
-	flags->has_we = 0;
-	flags->has_sprite = 0;
-	flags->has_ceil = 0;
-	flags->has_floor = 0;
+	flags->has_texs = 0;
+	flags->has_sky = 0;
 	flags->is_map = 0;
 	flags->done = 0;
 	flags->valid = 1;
+	i = -1;
+	while (++i < 2)
+		flags->sky_def[i] = 0;
 }
 
 /*
@@ -81,9 +79,8 @@ void	flags_ini(t_flags *flags)
 */
 void	check_done(t_flags *flags)
 {
-	if (flags->has_res && flags->has_no && flags->has_so && flags->has_ea &&
-		flags->has_we && flags->has_ceil && flags->has_floor &&
-		flags->has_sprite && flags->has_map)
+	if (flags->has_res && (flags->has_sky == 2) &&
+		(flags->has_texs == 5) && flags->has_map)
 		flags->done = 1;
 }
 
@@ -91,7 +88,7 @@ void	check_done(t_flags *flags)
 ** free 2D matrix, if not known length set it to -1
 ** but they'd had to be NULL terminated
 */
-void	free_mt(void **ptr, int len)
+void	free_mt(char **ptr, int len)
 {
 	if (len > 0)
 		while (--len >= 0)
@@ -110,7 +107,7 @@ void	free_mt(void **ptr, int len)
 /*
 ** like strlen, but generic (void)
 */
-int		mt_len(void **ptr)
+int		mt_len(char **ptr)
 {
 	int i;
 
@@ -149,7 +146,7 @@ int		cmp_and_ret(int i, int j, int bigger)
 	return (ret);
 }
 
-void	parse_res_aux(t_flags *flags, t_map *map, char ** arr)
+void	parse_res_aux(t_flags *flags, t_map *map, char **arr)
 {
 	map->res[0] = ft_atoi(arr[1]);
 	map->res[1] = ft_atoi(arr[2]);
@@ -170,20 +167,225 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 	char	**arr;
 	int		len;
 
-	if (!(flags->has_res))
+	if (!(flags->has_res) && flags->valid)
 	{
 		arr = ft_split(line, ' ');
-		len = mt_len((void **)arr);
+		len = mt_len(arr);
 		if (arr[0] && ft_strequ(arr[0], "R"))
 		{
-			if (len == 3)
+			if (len == 3 && !(map->res[0]))
 				parse_res_aux(flags, map, arr);
+			else if (len == 3 && map->res[0])
+				err("Resolution already defined", flags);
 			else
 				err("Incorrect number of arguments for resolution.", flags);
 		}
-		free_mt((void **)arr, len);
+		free_mt(arr, len);
 		free(arr);
 	}
+}
+
+int		is_tex(char *str)
+{
+	int	ret;
+
+	if (ft_strequ(str, "NO"))
+		ret = 1;
+	else if (ft_strequ(str, "SO"))
+		ret = 2;
+	else if (ft_strequ(str, "EA"))
+		ret = 3;
+	else if (ft_strequ(str, "WE"))
+		ret = 4;
+	else if (ft_strequ(str, "S"))
+		ret = 5;
+	else
+		ret = 0;
+	return (ret);
+	
+}
+
+void	parse_tex_aux(t_flags *flags, t_map *map, char **arr, int is_tex)
+{
+	int	tex;
+	int	fd;
+
+	tex = is_tex - 1;
+	if (!map->texs[tex])
+	{
+		if (!(check_ext(arr[1], ".xpm", flags, 0) ||
+			check_ext(arr[1], ".png", flags, 0)))
+			err("Texture has invalid file extension", flags);
+		else
+		{
+			map->texs[tex] = ft_strdup(arr[1]);
+			fd = open(map->texs[tex], O_RDONLY);
+			if (fd >= 0)
+				close(fd);
+			else
+				err("Texture file does not exist in given path.", flags);
+		}
+	}
+	else
+		err("Texture already defined", flags);
+}
+
+void	parse_tex(t_flags *flags, t_map *map, char *line)
+{
+	char	**arr;
+	int		len;
+
+	if (flags->has_texs != 5 && flags->valid)
+	{
+		arr = ft_split(line, ' ');
+		len = mt_len(arr);
+		if (arr[0] && is_tex(arr[0]))
+		{
+			if (len == 2)
+				parse_tex_aux(flags, map, arr, is_tex(arr[0]));
+			else
+				err("Incorrect number of arguments for texture.", flags);
+		}
+		free_mt(arr, len);
+		free(arr);
+	}	
+}
+
+int		is_sky(char *str)
+{
+	int	ret;
+
+	if (ft_strequ(str, "C"))
+		ret = 1;
+	else if (ft_strequ(str, "F"))
+		ret = 2;
+	else
+		ret = 0;
+	return (ret);
+}
+
+int		rgb_validator(char *r, char *g, char *b)
+{
+	int rgb[3];
+	int i;
+
+	i = -1;
+	rgb[0] = ft_atoi(r);
+	rgb[1] = ft_atoi(g);
+	rgb[2] = ft_atoi(b);
+	if (!(cmp_atoi_itoa(r)) || !(cmp_atoi_itoa(g)) ||
+		!(cmp_atoi_itoa(b)))
+		return (0);
+	while (++i < 3)
+		if (rgb[i] < 0 || rgb[i] > 255)
+			return (0);
+	return (1);
+}
+
+void	parse_sky_aux(t_flags *flags, t_map *map, char **rgb, int is_sky)
+{
+	int	sky;
+	int	i;
+
+	i = -1;
+	sky = is_sky - 1;
+	if (!flags->sky_def[sky])
+	{
+		if (!(rgb_validator(rgb[0], rgb[1], rgb[2])))
+			err("Invalid color", flags);
+		else
+		{
+			while (++i < 3)
+				map->sky[sky][i] = ft_atoi(rgb[i]);
+			flags->sky_def[sky] = 1;
+		}
+	}
+	else
+		err("Ceil/Floor already defined", flags);
+}
+
+char	*arr_join(char **arr)
+{
+	char	*str;
+	int		len;
+	int		i;
+
+	str = ft_strdup("");
+	len = mt_len(arr);
+	i = -1;
+	while (++i < len)
+		ft_strlcat(str, arr[i], ft_strlen(arr[i]) + 1);
+	return (str);
+}
+
+int  amount_of(char **arr, char c)
+{
+    int i;
+    int j;
+    int amount;
+
+    i = -1;
+    j = -1;
+    amount = 0;
+    while (arr[++i])
+    {
+        while (arr[i][++j])
+            if (arr[i][j] == c)
+                amount++;
+        j = -1;
+    }
+    return (amount);
+}
+
+char	**parse_sky_field(char **arr, int len, t_flags *flags)
+{
+	char	**new;
+	char	**ret;
+	char *str;
+	int i;
+	int length;
+
+	if (!(new = (char **)malloc(sizeof(char *) * (len - 1))))
+		return (NULL);
+	i = -1;
+	while (i++ < (len - 1))
+		new[i] = ft_strdup(arr[i + 1]);
+	if (amount_of(arr, ',') != 2)
+	{
+		err("Invalid parameter for ceil/floor", flags);
+		return (NULL);
+	}
+	str = arr_join(new);
+	length = mt_len(new);
+	free_mt(new, length);
+	free(new);
+	ret = ft_split(str, ',');
+	free(str);
+	return (ret);
+}
+
+void	parse_sky(t_flags *flags, t_map *map, char *line)
+{
+	char	**arr;
+	int		len;
+	char	**new;
+
+	if (flags->has_sky != 2 && flags->valid)
+	{
+		arr = ft_split(line, ' ');
+		len = mt_len(arr);
+		if (arr[0] && is_sky(arr[0]))
+		{
+			new = parse_sky_field(arr, len, flags);
+			if (mt_len(new) == 3 && flags->valid)
+				parse_sky_aux(flags, map, new, is_sky(arr[0]));
+			else
+				err("Incorrect number of arguments for ceiling/floor.", flags);
+			free_mt(new, mt_len(new));
+		}
+		free_mt(arr, mt_len(arr));
+		free(arr);
+	}	
 }
 
 void	parse(int fd, t_map *map, t_flags *flags)
@@ -193,12 +395,22 @@ void	parse(int fd, t_map *map, t_flags *flags)
 	{
 		parse_res(flags, map, line);
 		parse_tex(flags, map, line);
-		// parse_color(fd, &flags, map, line);
+		parse_sky(flags, map, line);
 		// parse_map(fd, &flags, map, line);
 		check_done(flags);
 		free(line);
 	}
 	free(line);
+}
+
+void	free_data(t_map *map)
+{
+	int i;
+
+	i = -1;
+	while (++i < 5)
+		if (map->texs[i])
+			free(map->texs[i]);
 }
 
 void	cub3d(int fd, int save, t_flags *flags)
@@ -208,7 +420,7 @@ void	cub3d(int fd, int save, t_flags *flags)
 	map_ini(&map);
 	map.save = save;
 	parse(fd, &map, flags);
-	//free_data(&map);
+	free_data(&map);
 }
 
 int		main(int argc, char **argv)
@@ -225,7 +437,7 @@ int		main(int argc, char **argv)
 	{
 		if (argc == 3)
 			save = is_save(argv[2], &flags);
-		if (check_ext(argv[1], ".cub", &flags))
+		if (check_ext(argv[1], ".cub", &flags, 0))
 		{
 			if ((fd = open(argv[1], O_RDONLY)) < 0)
 				err("Invalid path or read", &flags);
