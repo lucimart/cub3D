@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/02 15:22:03 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:38:21 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	check_done(t_flags *flags)
 ** free 2D matrix, if not known length set it to -1
 ** but they'd had to be NULL terminated
 */
-void	free_mt(char **ptr, int len)
+void	free_mt(void **ptr, int len)
 {
 	if (len > 0)
 		while (--len >= 0)
@@ -110,7 +110,7 @@ void	free_mt(char **ptr, int len)
 /*
 ** like strlen, but generic (void)
 */
-int		mt_len(char **ptr)
+int		mt_len(void **ptr)
 {
 	int i;
 
@@ -138,25 +138,31 @@ int		cmp_atoi_itoa(char *str)
 	return (ret);
 }
 
+int		cmp_and_ret(int i, int j, int bigger)
+{
+	int	ret;
+
+	if (bigger)
+		ret = (i >= j) ? i : j;
+	else
+		ret = (i >= j) ? j : i;
+	return (ret);
+}
+
 void	parse_res_aux(t_flags *flags, t_map *map, char ** arr)
 {
-	int		i;
-
-	i = -1;
 	map->res[0] = ft_atoi(arr[1]);
 	map->res[1] = ft_atoi(arr[2]);
 
-	if (cmp_atoi_itoa(arr[1]) && cmp_atoi_itoa(arr[2]))
+	if (cmp_atoi_itoa(arr[1]) && cmp_atoi_itoa(arr[2]) &&
+		map->res[0] > 0 && map->res[1] > 0)
 	{
-		while (++i < 2)
-			if (map->res[i] > map->max_res[i])
-				map->res[i] = map->max_res[i];
+		map->res[0] = cmp_and_ret(map->res[0], map->max_res[0], 1);
+		map->res[1] = cmp_and_ret(map->res[1], map->max_res[1], 1);
 		flags->has_res = 1;
-		printf("%d\n", map->res[0]);
-		printf("%d\n", map->res[1]);
 	}
 	else
-		err("Resolution has wrong arguments, use only numbers", flags);
+		err("Resolution has wrong args, use only positive numbers", flags);
 }
 
 void	parse_res(t_flags *flags, t_map *map, char *line)
@@ -167,7 +173,7 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 	if (!(flags->has_res))
 	{
 		arr = ft_split(line, ' ');
-		len = mt_len(arr);
+		len = mt_len((void **)arr);
 		if (arr[0] && ft_strequ(arr[0], "R"))
 		{
 			if (len == 3)
@@ -175,7 +181,7 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 			else
 				err("Incorrect number of arguments for resolution.", flags);
 		}
-		free_mt(arr, len);
+		free_mt((void **)arr, len);
 		free(arr);
 	}
 }
@@ -186,7 +192,7 @@ void	parse(int fd, t_map *map, t_flags *flags)
 	while (!flags->done && flags->valid && (get_next_line(fd, &line) == 1))
 	{
 		parse_res(flags, map, line);
-		// parse_tex(fd, &flags, map, line);
+		parse_tex(flags, map, line);
 		// parse_color(fd, &flags, map, line);
 		// parse_map(fd, &flags, map, line);
 		check_done(flags);
