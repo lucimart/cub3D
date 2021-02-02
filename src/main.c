@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/02 02:03:53 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:22:03 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	check_done(t_flags *flags)
 ** free 2D matrix, if not known length set it to -1
 ** but they'd had to be NULL terminated
 */
-void	free_mt(void **ptr, int len)
+void	free_mt(char **ptr, int len)
 {
 	if (len > 0)
 		while (--len >= 0)
@@ -120,16 +120,33 @@ int		mt_len(char **ptr)
 	return (i);
 }
 
+/*
+** Given a str that we want to see if its numeric val
+** is truly equal to the str, ex: "123" = 123. TRUE
+** but ex: "123a45" = 123. FALSE
+*/
+int		cmp_atoi_itoa(char *str)
+{
+	int		atoi;
+	char	*itoa;
+	int		ret;
+
+	atoi = ft_atoi(str);
+	itoa = ft_itoa(atoi);
+	ret = ft_strequ(str, itoa);
+	free(itoa);
+	return (ret);
+}
+
 void	parse_res_aux(t_flags *flags, t_map *map, char ** arr)
 {
-	int	i;
+	int		i;
 
 	i = -1;
 	map->res[0] = ft_atoi(arr[1]);
 	map->res[1] = ft_atoi(arr[2]);
 
-	if (ft_strequ(ft_itoa(map->res[0]), arr[1]) &&
-		ft_strequ(ft_itoa(map->res[1]), arr[2]))
+	if (cmp_atoi_itoa(arr[1]) && cmp_atoi_itoa(arr[2]))
 	{
 		while (++i < 2)
 			if (map->res[i] > map->max_res[i])
@@ -138,7 +155,6 @@ void	parse_res_aux(t_flags *flags, t_map *map, char ** arr)
 		printf("%d\n", map->res[0]);
 		printf("%d\n", map->res[1]);
 	}
-
 	else
 		err("Resolution has wrong arguments, use only numbers", flags);
 }
@@ -159,7 +175,7 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 			else
 				err("Incorrect number of arguments for resolution.", flags);
 		}
-		free_mt((void **)arr, len);
+		free_mt(arr, len);
 		free(arr);
 	}
 }
@@ -176,6 +192,7 @@ void	parse(int fd, t_map *map, t_flags *flags)
 		check_done(flags);
 		free(line);
 	}
+	free(line);
 }
 
 void	cub3d(int fd, int save, t_flags *flags)
