@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/01 21:42:05 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/02 02:03:53 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	check_done(t_flags *flags)
 void	free_mt(void **ptr, int len)
 {
 	if (len > 0)
-		while (--len)
+		while (--len >= 0)
 		{
 			free(ptr[len]);
 			ptr[len] = NULL;
@@ -105,19 +105,17 @@ void	free_mt(void **ptr, int len)
 			free(*ptr);
 			*ptr++ = NULL;
 		}
-	
-	free(ptr);
 }
 
 /*
 ** like strlen, but generic (void)
 */
-int		mt_len(void **ptr)
+int		mt_len(char **ptr)
 {
 	int i;
 
 	i = 0;
-	while (ptr[i])
+	while (*(ptr + i))
 		i++;
 	return (i);
 }
@@ -153,7 +151,7 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 	if (!(flags->has_res))
 	{
 		arr = ft_split(line, ' ');
-		len = mt_len((void **)arr);
+		len = mt_len(arr);
 		if (arr[0] && ft_strequ(arr[0], "R"))
 		{
 			if (len == 3)
@@ -162,6 +160,7 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 				err("Incorrect number of arguments for resolution.", flags);
 		}
 		free_mt((void **)arr, len);
+		free(arr);
 	}
 }
 
