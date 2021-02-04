@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/04 17:40:28 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/04 17:59:52 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	free_mt(char **ptr, int len)
 			free(*ptr);
 			*ptr++ = NULL;
 		}
+	free(ptr);
+	ptr = NULL;
 }
 
 /*
@@ -184,7 +186,6 @@ void	parse_res(t_flags *flags, t_map *map, char *line)
 				err("Incorrect number of arguments for resolution.", flags);
 		}
 		free_mt(arr, len);
-		free(arr);
 	}
 }
 
@@ -251,7 +252,6 @@ void	parse_tex(t_flags *flags, t_map *map, char *line)
 				err("Incorrect number of arguments for texture.", flags);
 		}
 		free_mt(arr, len);
-		free(arr);
 	}	
 }
 
@@ -363,7 +363,6 @@ char	**parse_sky_field(char **arr, int len, t_flags *flags)
 	str = arr_join(new);
 	length = mt_len(new);
 	free_mt(new, length);
-	free(new);
 	ret = ft_split(str, ',');
 	free(str);
 	return (ret);
@@ -389,7 +388,6 @@ void	parse_sky(t_flags *flags, t_map *map, char *line)
 			free_mt(new, mt_len(new));
 		}
 		free_mt(arr, mt_len(arr));
-		free(arr);
 	}	
 }
 
@@ -510,6 +508,7 @@ void	free_data(t_map *map)
 		if (map->texs[i])
 			free(map->texs[i]);
 	free_mt(map->mt, map->rows);
+	free_mt(map->buf, map->buf_rows + 1);
 }
 
 void	map_buffer(t_map *map, int *fd, char *path)
@@ -520,6 +519,7 @@ void	map_buffer(t_map *map, int *fd, char *path)
 	i = 0;
 	while (++i && (get_next_line(*fd, &line) == 1))
 		free(line);
+	free(line);
 	i--;
 	close(*fd);
 	*fd = open(path, O_RDONLY);
