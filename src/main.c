@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 20:34:59 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/02 20:38:17 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/04 17:40:28 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	map_ini(t_map *map) {
 		while (++j < 3)
 			map->sky[i][j] = 0;
 	map->mt = NULL;
+	map->rows = 0;
+	map->cols = -1;
+	map->buf = NULL;
+	map->buf_rows = 0;
 }
 
 /*
@@ -66,7 +70,6 @@ void	flags_ini(t_flags *flags)
 	flags->has_res = 0;
 	flags->has_texs = 0;
 	flags->has_sky = 0;
-	flags->is_map = 0;
 	flags->done = 0;
 	flags->valid = 1;
 	i = -1;
@@ -224,6 +227,7 @@ void	parse_tex_aux(t_flags *flags, t_map *map, char **arr, int is_tex)
 				close(fd);
 			else
 				err("Texture file does not exist in given path.", flags);
+			flags->has_texs++;
 		}
 	}
 	else
@@ -298,6 +302,7 @@ void	parse_sky_aux(t_flags *flags, t_map *map, char **rgb, int is_sky)
 			while (++i < 3)
 				map->sky[sky][i] = ft_atoi(rgb[i]);
 			flags->sky_def[sky] = 1;
+			flags->has_sky++;
 		}
 	}
 	else
@@ -388,19 +393,112 @@ void	parse_sky(t_flags *flags, t_map *map, char *line)
 	}	
 }
 
-void	parse(int fd, t_map *map, t_flags *flags)
+int		only_map_left(t_flags *flags)
 {
-	char	*line;
-	while (!flags->done && flags->valid && (get_next_line(fd, &line) == 1))
+	int ret;
+
+	ret = 0;
+	if (flags->has_res && (flags->has_sky == 2) &&
+		(flags->has_texs == 5))
+		ret = 1;
+	return (ret);
+}
+
+char	**read_map(t_map *map, int row)
+{
+	char	**ret;
+	int		i;
+	int		j;
+	int		k;
+
+	map->rows = map->buf_rows - row + 1;
+	ret = (char **)ft_calloc(map->rows + 1, sizeof(char *));
+	ret[map->rows] = NULL;
+	i = row - 1;
+	while (map->buf[++i] && i <= map->buf_rows)
+		map->cols = map->cols >= (int)ft_strlen(map->buf[i]) ? map->cols :
+					ft_strlen(map->buf[i]);
+	i = -1;
+	while (++i < map->rows)
+		ret[i] = (char *)ft_calloc(map->cols, sizeof(char));
+	i = row - 1;
+	j = -1;
+	k = -1;
+	while (++i < (map->buf_rows + 1) && ++k < map->rows && (j = -1))
+		while (++j < map->cols)
+		{
+			if (j < (int)ft_strlen(map->buf[i]))
+				ret[k][j] = map->buf[i][j];
+			else
+				ret[k][j] = ' ';
+		}
+	return (ret);
+}
+
+int		is_part_sorrounded(char **map, int x, int y, char *set)
+{
+    int check_x;
+    int check_y;
+    int counter;
+
+    counter = 0;
+    check_x = x - 1;
+    check_y = y - 1 - 1;
+    while (check_x <= x + 1)
+    {
+        while (++check_y <= y + 1)
+            if (check_x < 0 || check_y < 0 ||
+                check_y > (int)ft_strlen(map[check_x]) - 1 ||
+                in_set(map[check_x][check_y], set))
+                return (1);
+        check_y = y - 1 - 1;
+        if (++counter && (counter == 3) && ((counter = 0) || 1))
+            check_x++;
+    }
+    return (0);
+}
+
+void	validate_map(t_map *map, t_flags *flags)
+{
+	int	i;
+	int	j;
+
+	if (amount_of(map->mt, 'N') + amount_of(map->mt, 'S') +
+		amount_of(map->mt, 'E') + amount_of(map->mt, 'W') != 1)
+		flags->valid = 0;
+	i = -1;
+	while (++i < map->rows && (j = -1))
+		while (++j)
+			if (!(in_set(map->mt[i][j], " 012NSEW")) ||
+				(in_set(map->mt[i][j], "02NSEW") &&
+				is_part_sorrounded(map->mt, i, j, " ")))
+				flags->valid = 0;
+}
+
+void	parse_map(t_flags *flags, t_map *map, int cur_row)
+{
+	if (only_map_left(flags) && flags->valid)
 	{
-		parse_res(flags, map, line);
-		parse_tex(flags, map, line);
-		parse_sky(flags, map, line);
-		// parse_map(fd, &flags, map, line);
-		check_done(flags);
-		free(line);
+		map->mt = read_map(map, ++cur_row);
+		validate_map(map, flags);
+		if (flags->valid)
+			flags->has_map = 1;
 	}
-	free(line);
+}
+
+void	parse(t_map *map, t_flags *flags)
+{
+	int	i;
+
+	i = -1;
+	while (!flags->done && flags->valid)
+	{
+		parse_res(flags, map, map->buf[++i]);
+		parse_tex(flags, map, map->buf[i]);
+		parse_sky(flags, map, map->buf[i]);
+		parse_map(flags, map, i);
+		check_done(flags);
+	}
 }
 
 void	free_data(t_map *map)
@@ -411,15 +509,37 @@ void	free_data(t_map *map)
 	while (++i < 5)
 		if (map->texs[i])
 			free(map->texs[i]);
+	free_mt(map->mt, map->rows);
 }
 
-void	cub3d(int fd, int save, t_flags *flags)
+void	map_buffer(t_map *map, int *fd, char *path)
+{
+	int i;
+	char *line;
+
+	i = 0;
+	while (++i && (get_next_line(*fd, &line) == 1))
+		free(line);
+	i--;
+	close(*fd);
+	*fd = open(path, O_RDONLY);
+	map->buf = (char **)ft_calloc(i, sizeof(char *));
+	map->buf_rows = i;
+	i = -1;
+	while ((get_next_line(*fd, &line) == 1))
+		map->buf[++i] = line;
+	map->buf[++i] = line;
+	close(*fd);
+}
+
+void	cub3d(int *fd, int save, t_flags *flags, char *path)
 {
 	t_map	map;
 
 	map_ini(&map);
+	map_buffer(&map, fd, path);
 	map.save = save;
-	parse(fd, &map, flags);
+	parse(&map, flags);
 	free_data(&map);
 }
 
@@ -442,10 +562,7 @@ int		main(int argc, char **argv)
 			if ((fd = open(argv[1], O_RDONLY)) < 0)
 				err("Invalid path or read", &flags);
 			else
-			{
-				cub3d(fd, save, &flags);
-				close(fd);
-			}
+				cub3d(&fd, save, &flags, argv[1]);
 		}	
 	}
 	system("leaks cub3D");

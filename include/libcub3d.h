@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 18:55:31 by lucimart          #+#    #+#             */
-/*   Updated: 2021/02/02 18:21:03 by lucimart         ###   ########.fr       */
+/*   Updated: 2021/02/03 21:21:35 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_flags
 	int		has_sky;
 	int		sky_def[2];
 	int		has_map;
-	int		is_map;
 	int		done;
 	int		valid;
 }	t_flags;
@@ -80,7 +79,11 @@ typedef struct	s_map
 	char	*texs[5];
 	int		sky[2][3];
 	char	**mt;
+	int		rows;
+	int		cols;
 	int		save;
+	char	**buf;
+	int		buf_rows;
 }				t_map;
 
 typedef struct s_conf
@@ -114,7 +117,7 @@ void	close_win(int keycode, t_conf *conf);
 int		is_ext(const char *filename, const char *ext);
 int		is_save_flag(const char *str);
 int		amount_of(char **arr, char c);
-void	parse(int fd, t_map *map, t_flags *flags);
-void	parse_map(int fd, char *line, t_conf *conf);
+void	parse(t_map *map, t_flags *flags);
+//void	parse_map(int fd, char *line, t_conf *conf);
 void	err(char *str, t_flags *flags);
 #endif
